@@ -1,6 +1,8 @@
 // import { test, expect } from "@playwright/test";
 
 const { time } = require("console");
+// import {pulled_data} from './data.js';
+const {pulled_data} = require('./data');
 
 
 // 3 clicks on more get to 100
@@ -12,8 +14,8 @@ const { time } = require("console");
 //   await expect(page).toHaveTitle
 // })
 
-const heyo = new Date('2025-01-29T00:15:48.500Z');
-const heyo3 = new Date('2025-01-29T01:41:19.500Z');
+// const heyo = new Date('2025-01-29T00:15:48.500Z');
+// const heyo3 = new Date('2025-01-29T01:41:19.500Z');
 // 2025-01-29T01:31:43.500Z
 // const heyo2 = new Date('2025-01-28T23:40:51.500z');
 // const heyo4 = parseInt(1738107651, 10);
@@ -37,7 +39,7 @@ const time_parser = (date) => {
         Nov: 304,
         Dec: 334
     }
-    console.log('\n', date, '\n')
+    // console.log('\n', date, '\n')
   const date_obj = {
       year: date.getFullYear(),
       month: month_days_passed[date.toString().slice(4,7)],
@@ -46,13 +48,14 @@ const time_parser = (date) => {
       minutes: date.getMinutes(),
       seconds: date.getSeconds()
   }
-  console.log(date_obj.day, date_obj.hour , date_obj.minutes , date_obj.seconds)
+//   console.log(date_obj.day, date_obj.hour , date_obj.minutes , date_obj.seconds)
   const date_number = (date_obj.year * 31536000) + (date_obj.month * 86400) + (date_obj.day * 86400) + (date_obj.hour === 0 ? 3600 : date_obj.hour * 3600) + (date_obj.minutes === 0 ? 60 : date_obj.minutes * 60) + date_obj.seconds
   return date_number
 }
-console.log(time_parser(heyo))
-console.log(time_parser(heyo3))
-console.log(time_parser(heyo) > time_parser(heyo3))
+
+// console.log(time_parser(heyo))
+// console.log(time_parser(heyo3))
+// console.log(time_parser(heyo) > time_parser(heyo3))
 // console.log(heyo4)
 // console.log(heyo5)
 
@@ -86,15 +89,36 @@ console.log(time_parser(heyo) > time_parser(heyo3))
 // test('100');
 // expect(locator).toHaveCount(100);
 
-function parseDateToSeconds(dateString) {
-    const [isoDate, timestamp] = dateString.split(' ');
 
-    // Convert ISO date to Unix timestamp in seconds
-    const isoDateSeconds = Math.floor(new Date(isoDate + 'Z').getTime() / 1000);
 
-    // Ensure both values are numbers
-    const numericTimestamp = parseInt(timestamp, 10);
 
-    // Choose the most accurate representation
-    return numericTimestamp > 0 ? numericTimestamp : isoDateSeconds;
+// function parseDateToSeconds(dateString) {
+//     const [isoDate, timestamp] = dateString.split(' ');
+
+//     // Convert ISO date to Unix timestamp in seconds
+//     const isoDateSeconds = Math.floor(new Date(isoDate + 'Z').getTime() / 1000);
+
+//     // Ensure both values are numbers
+//     const numericTimestamp = parseInt(timestamp, 10);
+
+//     // Choose the most accurate representation
+//     return numericTimestamp > 0 ? numericTimestamp : isoDateSeconds;
+// }
+
+let updated_data = [];
+// console.log(pulled_data)
+for(let i = 0; i < pulled_data.length; i++){
+    updated_data.push({
+        id: i+1,
+        time_in_sec: new Date(pulled_data[i].date_time.split(' ')[0]+'.500z')
+    })
 }
+// console.log(updated_data)
+for(let i = 1; i < updated_data.length; i++){
+    if(updated_data[i-1].time_in_sec > updated_data[i].time_in_sec === false){
+        console.log(updated_data[i-1], updated_data[i])
+    }
+    console.log(updated_data[i-1].time_in_sec > updated_data[i].time_in_sec)
+}
+// time_parser(updated_data)
+// console.log(updated_data)
