@@ -67,7 +67,11 @@ async function sortHackerNewsArticles() {
   context.close();
 }; //)
 // }
+test('Check the first 100 articles to be in order',async ()=> sortHackerNewsArticles());
+// (async () => {
+//   await sortHackerNewsArticles();
+// })();
 
-(async () => {
-  await sortHackerNewsArticles();
-})();
+// My contact information:
+// Email: gerardobonillajr.dev@gmail.com
+// My Github: @Lalo-B
